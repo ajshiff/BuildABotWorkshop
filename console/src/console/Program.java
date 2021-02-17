@@ -5,7 +5,7 @@ public class Program {
     System.out.println("We are a team:");
     System.out.println("Daniel");
     System.out.println("Aaron is on the team!");
-    System.out.println("We are an awesome team!")
+    System.out.println("We are an awesome team!");
   }
 }
  
