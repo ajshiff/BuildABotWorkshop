@@ -1,0 +1,4 @@
+include ':application'
+include ':domain'
+include ':app'
+rootProject.name = "Build a Bot Workshop"
