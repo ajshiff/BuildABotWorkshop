@@ -1,4 +1,4 @@
-
+package com.jakefoundation.buildabotworkshop.domain;
 /* Create a class named Owner in Domain and implement it according to this UML.
  * Let private fields be final.
  * */

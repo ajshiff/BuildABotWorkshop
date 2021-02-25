@@ -1,3 +1,4 @@
+package com.jakefoundation.buildabotworkshop.domain;
 /**
  * Create a class in Domain called Angle.
  *
@@ -12,7 +13,7 @@
 public class Angle;
 //class
 {
-    private final doble angle;//not sure if that is at the right place, intended to make it not writable
+    private final double angle;//not sure if that is at the right place, intended to make it not writable
 
 public Angle(double angleValue) {
         //constructor
