@@ -10,23 +10,20 @@ package com.jakefoundation.buildabotworkshop.domain;
  *
  * See UML for details
  */
-public class Angle;
-//class
+public class Angle
 {
-    private final double angle;//not sure if that is at the right place, intended to make it not writable
+    private final double angle;
 
-public Angle(double angleValue) {
-        //constructor
-        this.angle = angleValue % 360;
-        if (this.angle > 0)
-        {
-        this.angle -= 360;
+    public Angle(double angleValue) {
+        angleValue = angleValue % 360;
+        if (angleValue < 0) {
+            this.angle = angleValue + 360;
+        } else {
+            this.angle = angleValue;
         }
+    }
 
-        }
-
-public int getAngleValue() {
-        //getter for the angle
+    public double getAngleValue() {
         return this.angle;
-        }
-        }
+    }
+}
