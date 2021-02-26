@@ -1,33 +1,28 @@
 package com.jakefoundation.buildabotworkshop.domain;
 
-/* Create a MoveTankCommand class according to this UML.
- * The private fields should be final.
- */
-
+//class
 public class MoveTankCommand {
-    //class
 
     //finals
-    private final double doMove;
-    private final double angle;
-    private final double speed;
+    private final ShouldDo shouldDo;
+    private final Angle angle;
+    private final Speed speed;
 
-    public MoveTankCommand(double ShouldDo , double Angle, double Speed) {
-        //constructor
-        this.doMove = ShouldDo;
-        this.angle = Angle;
-        this.speed = Speed;
+    //constructor
+    public MoveTankCommand(ShouldDo shouldDo, Angle angle, Speed speed) {
+        this.shouldDo = shouldDo;
+        this.angle = angle;
+        this.speed = speed;
     }
 
     //getters
-    public double getDoMove() {
-        return doMove;
+    public ShouldDo getShouldMove() {
+        return shouldDo;
     }
-
-    public double getDirection() {
+    public Angle getDirection() {
         return angle;
     }
-    public double getSpeed() {
+    public Speed getSpeed() {
         return speed;
     }
 }
