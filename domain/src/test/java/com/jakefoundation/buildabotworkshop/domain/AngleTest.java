@@ -3,7 +3,7 @@ package com.jakefoundation.buildabotworkshop.domain;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class AngleTests {
+public class AngleTest {
     @Test
     public void negativeAngle_givesPositiveAngle () {
         double degrees = -90;
