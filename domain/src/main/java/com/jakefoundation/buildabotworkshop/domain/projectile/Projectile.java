@@ -1,4 +1,4 @@
-package com.jakefoundation.buildabotworkshop.domain.Projectile;
+package com.jakefoundation.buildabotworkshop.domain.projectile;
 
 import com.jakefoundation.buildabotworkshop.domain.Angle;
 import com.jakefoundation.buildabotworkshop.domain.Position;
