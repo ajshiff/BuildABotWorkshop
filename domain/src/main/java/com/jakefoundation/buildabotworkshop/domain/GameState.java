@@ -1,5 +1,6 @@
 package com.jakefoundation.buildabotworkshop.domain;
 
+import com.jakefoundation.buildabotworkshop.domain.collectable.Collectable;
 import com.jakefoundation.buildabotworkshop.domain.obstacle.Obstacle;
 import com.jakefoundation.buildabotworkshop.domain.projectile.Projectile;
 import com.jakefoundation.buildabotworkshop.domain.unit.Unit;
@@ -14,7 +15,7 @@ public class GameState {
     private final List<Projectile> projectiles = new ArrayList<>();
     private final List<Obstacle> obstacles = new ArrayList<>();
     private final List<Collectable> collectables = new ArrayList<>();
-    private final Gameboard gameBoard = new Gameboard();
+    private final GameBoard gameBoard = new GameBoard(0, 0);
 
     public Unit getYourUnit() {
         return yourUnit;
