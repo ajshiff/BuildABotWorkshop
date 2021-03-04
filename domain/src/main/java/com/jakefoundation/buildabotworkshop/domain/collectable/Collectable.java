@@ -1,31 +1,23 @@
-package com.jakefoundation.buildabotworkshop.domain.unit;
+package com.jakefoundation.buildabotworkshop.domain.collectable;
 
-/*In domain, Create a folder called Collectable.
- *In that folder, create a class named Collectable
- * Let private fields be final.
- */
 import com.jakefoundation.buildabotworkshop.domain.Position;
 
 public class Collectable {
 
-    private final CollectableEffect type;
+    private final CollectableEffect effect;
     private final Position position;
 
-    public collectable( CollectableEffect type, Position position){
-        //constructor
-        this.type = effect;
-        this.position = thePosition;
-
+    public Collectable( CollectableEffect effect, Position position){
+        this.effect = effect;
+        this.position = position;
     }
 
-    public double getPosition() {
-        //getter for position
+    public Position getPosition() {
         return position;
     }
 
-    public double getEffect() {
-        //getter for type
-        return type;
+    public CollectableEffect getEffect() {
+        return effect;
     }
 
 }

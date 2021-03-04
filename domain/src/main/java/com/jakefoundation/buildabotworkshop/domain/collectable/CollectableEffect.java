@@ -1,11 +1,5 @@
-package com.jakefoundation.buildabotworkshop.domain.unit;
-
-/*In domain, Create a folder called Collectable.
-*In that folder, create an enum called CollectableEffect.
- */
-import java.lang.Enum class
+package com.jakefoundation.buildabotworkshop.domain.collectable;
 
 public enum CollectableEffect{
     ammo, heal, speed
-
 }
