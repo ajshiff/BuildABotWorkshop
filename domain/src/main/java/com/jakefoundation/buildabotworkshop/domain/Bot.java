@@ -4,7 +4,7 @@ public interface Bot {
 
     MoveTankCommand moveCommand(GameState gameState);
 
-    FireBulleCommand fireCommand(GameState gameState);
+    FireBulletCommand fireCommand(GameState gameState);
 
     String getBotCommonName();
 
