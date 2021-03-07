@@ -19,9 +19,9 @@ public class FireBulletRequest
                              Authorization,
                              FireBulletCommand)
     {
-        this.username = Authorization.getUsername();
-        this.password= Authorization.getPassword();
-        this.angle = FireBulletCommand.getAngle().getAngleValue();
+        this.username = authorization.getUsername();
+        this.password= authorization.getPassword();
+        this.angle = fireBulletCommand.getAngle().getAngleValue();
 
     }
 

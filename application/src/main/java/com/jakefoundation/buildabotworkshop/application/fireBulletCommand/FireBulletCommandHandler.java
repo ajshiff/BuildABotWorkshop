@@ -27,10 +27,6 @@ public class FireBulletCommandHandler {
         ResultStatus result = fireBulletService.sendFireBulletRequest(request);
         return result;
 
-        IFireBulletCommandService iFireBulletCommandService;
-        iFireBulletCommandService = new ResultStatus();
-
-
     }
 }
 
