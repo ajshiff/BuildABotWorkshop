@@ -4,8 +4,8 @@ package main.java.com.jakefoundation.buildabotworkshop.application.fireBulletCom
  Let Private Fields be final.
  */
 import com.jakefoundation.buildabotworkshop.application.common.ResultStatus;
-import com.jakefoundation.buildabotworkshop.domain.FireBulletCommand;
 import com.jakefoundation.buildabotworkshop.application.common.Authorization;
+import main.java.com.jakefoundation.buildabotworkshop.domain.FireBulletCommand;
 
 public class FireBulletRequest
 //creates a class

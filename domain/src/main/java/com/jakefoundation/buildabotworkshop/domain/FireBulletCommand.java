@@ -13,7 +13,7 @@ public class FireBulletCommand {
     private final ShouldDo doFire;
     private final Angle angle;
 
-    public FireBulletCommand() {
+    public FireBulletCommand(ShouldDo doFire, Angle angle) {
         //constructor
         this.doFire = doFire;
         this.angle = angle;
