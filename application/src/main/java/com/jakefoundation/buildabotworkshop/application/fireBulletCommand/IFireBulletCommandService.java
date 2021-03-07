@@ -1,4 +1,4 @@
-package main.java.com.jakefoundation.buildabotworkshop.application.MoveTankCommand;
+package com.jakefoundation.buildabotworkshop.application.fireBulletCommand;
 
 /* Create a IFireBulletCommandService interface in the MoveTankCommand folder.
  *Give it one method called sendFireBulletRequest that takes a FireBulletRequest
@@ -6,10 +6,9 @@ package main.java.com.jakefoundation.buildabotworkshop.application.MoveTankComma
  *(which is an enum that should be defined by now)
  */
 import com.jakefoundation.buildabotworkshop.application.common.ResultStatus;
-import main.java.com.jakefoundation.buildabotworkshop.application.fireBulletCommand.FireBulletRequest;
 
 public interface IFireBulletCommandService {
-    public ResultStatus sendFireBulletRequest(FireBulletRequest);
+    ResultStatus sendFireBulletRequest(FireBulletRequest fireBulletRequest);
 
 
 }

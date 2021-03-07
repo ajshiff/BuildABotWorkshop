@@ -1,4 +1,4 @@
-package main.java.com.jakefoundation.buildabotworkshop.domain;
+package com.jakefoundation.buildabotworkshop.domain;
 /*
 Create a FireBulletCommand class according to this UML.
 Private fields should be final.
