@@ -9,7 +9,7 @@ import com.jakefoundation.buildabotworkshop.application.common.ResultStatus;
 import main.java.com.jakefoundation.buildabotworkshop.application.fireBulletCommand.FireBulletRequest;
 
 public interface IFireBulletCommandService {
-    public ResultStatus sendFireBulletRequest(FireBulletRequest FireBulletRequest request);
+    public ResultStatus sendFireBulletRequest(FireBulletRequest);
 
 
 }
