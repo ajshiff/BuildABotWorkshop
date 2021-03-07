@@ -10,11 +10,11 @@ public class Authorization {
     }
 
 
-    public static String getUsername() {
+    public String getUsername() {
         return username;
     }
 
-    public static String getPassword() {
+    public  String getPassword() {
         return password;
     }
 }
