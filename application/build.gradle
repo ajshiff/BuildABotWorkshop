@@ -8,6 +8,8 @@ java {
 }
 
 dependencies {
-    implementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13.2'
     implementation project(path: ':domain')
+    testImplementation 'org.mockito:mockito-core:'
+    testImplementation 'org.mockito:mockito-inline:3.7.7'
 }
