@@ -1,0 +1,3 @@
+package com.jakefoundation.buildabotworkshop.localgamestatecalculator.domain
+
+internal class EntityTest
