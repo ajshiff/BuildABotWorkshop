@@ -8,26 +8,31 @@ package main.java.com.jakefoundation.buildabotworkshop.application.fireBulletCom
   3 - Return the value given by the IMoveTankCommandService.
 */
 import main.java.com.jakefoundation.buildabotworkshop.application.MoveTankCommand.IFireBulletCommandService;
+import main.java.com.jakefoundation.buildabotworkshop.domain.FireBulletCommand;
 import com.jakefoundation.buildabotworkshop.application.common.ResultStatus;
 
-public class FireBulletCommandHandler
-{
+public class FireBulletCommandHandler {
 
     private final IFireBulletCommandService fireBulletService;
+
+
 
 
     public FireBulletCommandHandler(IFireBulletCommandService fireBulletService) {
         this.fireBulletService = fireBulletService;
     }
 
-    public IFireBulletCommandService getFireBulletService() {
-        return fireBulletService;
-    }
-
-    public void handleFireBulletCommand(IFireBulletCommandService){
+    public ResultStatus handleFireBulletCommand(FireBulletCommand fireBulletCommand){
+        FireBulletRequest request = new FireBulletRequest(fireBulletCommand);
+        ResultStatus result = fireBulletService.sendFireBulletRequest(request);
+        return result;
 
         IFireBulletCommandService iFireBulletCommandService;
         iFireBulletCommandService = new ResultStatus();
-    }
 
+
+    }
 }
+
+
+

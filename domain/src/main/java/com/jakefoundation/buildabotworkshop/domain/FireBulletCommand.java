@@ -26,7 +26,7 @@ public class FireBulletCommand {
         return doFire;
     }
 
-    public Angle getAngle() {
+    public static Angle getAngle() {
         return angle;
     }
 }
