@@ -14,7 +14,7 @@ public class Authorization {
         return username;
     }
 
-    public  String getPassword() {
+    public String getPassword() {
         return password;
     }
 }
