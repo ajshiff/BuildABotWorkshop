@@ -17,7 +17,7 @@ public class FireBulletRequest
 
     public FireBulletRequest(Authorization,
                              Authorization,
-                             FireBulletCommand)
+                             FireBulletCommand FireBulletCommand fireBulletCommand)
     {
         this.username = Authorization.getUsername();
         this.password= Authorization.getPassword();

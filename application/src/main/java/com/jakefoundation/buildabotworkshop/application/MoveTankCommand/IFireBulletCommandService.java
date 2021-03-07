@@ -5,9 +5,11 @@ package main.java.com.jakefoundation.buildabotworkshop.application.MoveTankComma
  *(the same type as the DTO you just made) and returns an ResultStatus
  *(which is an enum that should be defined by now)
  */
+import com.jakefoundation.buildabotworkshop.application.common.ResultStatus;
+import main.java.com.jakefoundation.buildabotworkshop.application.fireBulletCommand.FireBulletRequest;
 
 public interface IFireBulletCommandService {
-    void sendFireBulletRequest();
+    public ResultStatus sendFireBulletRequest(FireBulletRequest FireBulletRequest request);
 
 
 }
