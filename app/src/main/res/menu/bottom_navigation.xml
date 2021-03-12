@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/play_launcher"
+        android:icon="@drawable/play_launcher_foreground"
+        android:title="Play" />
+
+    <item
+        android:id="@+id/scenario_launcher"
+        android:icon="@drawable/play_launcher_foreground"
+        android:title="Scenarios" />
+
+    <item
+        android:id="@+id/bot_launcher"
+        android:icon="@drawable/play_launcher_foreground"
+        android:title="Bot" />
+
+
+
+</menu>

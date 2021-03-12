@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Build a Bot Workshop</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="select_a_challenge">Select a challenge</string>
+    <string name="scenario_random">Scenario Random</string>
+    <string name="scenario_y">Scenario: Y</string>
+    <string name="scenario_x">Scenario: X</string>
+    <string name="scenario_you_and_1_bot">Scenario: You and 1 Bot</string>
+    <string name="scenario_survive_ffa">Scenario:Survive FFA</string>
+    <string name="tutorial_move">Tutorial: move</string>
+    <string name="tutorial_fire">Tutorial: Fire</string>
 </resources>
