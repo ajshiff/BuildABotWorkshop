@@ -10,6 +10,4 @@ public interface Bot {
 
     String getOwnerName();
 
-    String getBotOwnerPassword();
-
 }
