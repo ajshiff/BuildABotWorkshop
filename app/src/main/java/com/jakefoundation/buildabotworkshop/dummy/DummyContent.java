@@ -23,7 +23,7 @@ public class DummyContent {
      */
     public static final Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
 
-    private static final int COUNT = 25;
+    private static final int COUNT = 10;
 
     static {
         // Add some sample items.
@@ -38,7 +38,7 @@ public class DummyContent {
     }
 
     private static DummyItem createDummyItem(int position) {
-        return new DummyItem(String.valueOf(position), "Item " + position, makeDetails(position));
+        return new DummyItem(String.valueOf(position), "Build in Bot " + position, makeDetails(position));
     }
 
     private static String makeDetails(int position) {

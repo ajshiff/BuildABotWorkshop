@@ -14,6 +14,9 @@ import android.view.ViewGroup;
 
 import com.jakefoundation.buildabotworkshop.dummy.DummyContent;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A fragment representing a list of Items.
  */
@@ -64,7 +67,15 @@ public class botsFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MybotsRecyclerViewAdapter(DummyContent.ITEMS));
+
+            List<DummyContent.DummyItem> items = new ArrayList<>();
+            for (int i = 1; i <= 5; i++) {
+                items.add(new DummyContent.DummyItem(i+"", "Build in Bot " + i, ""));
+            }
+            for (int i = 6; i <= 10; i++) {
+                items.add(new DummyContent.DummyItem(i+"", "Custom Bot " + i, ""));
+            }
+            recyclerView.setAdapter(new MybotsRecyclerViewAdapter(items));
         }
         return view;
     }
