@@ -9,13 +9,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameState {
-    private Unit yourUnit;
+    private final Unit yourUnit;
+    private final List<Unit> units;
+    private final List<Projectile> projectiles;
+    private final List<Obstacle> obstacles;
+    private final List<Collectable> collectables;
+    private final GameBoard gameBoard;
 
-    private final List<Unit> units = new ArrayList<>();
-    private final List<Projectile> projectiles = new ArrayList<>();
-    private final List<Obstacle> obstacles = new ArrayList<>();
-    private final List<Collectable> collectables = new ArrayList<>();
-    private final GameBoard gameBoard = new GameBoard(0, 0);
+    public GameState (
+            Unit yourUnit,
+            List<Unit> units,
+            List<Projectile> projectiles,
+            List<Obstacle> obstacles,
+            List<Collectable> collectables,
+            GameBoard gameBoard) {
+        this.yourUnit = yourUnit;
+        this.units = units;
+        this.projectiles = projectiles;
+        this.obstacles = obstacles;
+        this.collectables = collectables;
+        this.gameBoard = gameBoard;
+    }
 
     public Unit getYourUnit() {
         return yourUnit;

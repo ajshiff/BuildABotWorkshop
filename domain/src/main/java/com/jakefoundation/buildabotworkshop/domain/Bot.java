@@ -2,9 +2,9 @@ package com.jakefoundation.buildabotworkshop.domain;
 
 public interface Bot {
 
-    MoveTankRequest moveCommand(GameState gameState);
+    MoveTankCommand moveCommand(GameState gameState);
 
-    FireBulletRequest fireCommand(GameState gameState);
+    FireBulletCommand fireCommand(GameState gameState);
 
     String getBotCommonName();
 
