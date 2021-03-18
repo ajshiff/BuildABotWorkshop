@@ -4,17 +4,17 @@
     <item
         android:id="@+id/play_launcher"
         android:icon="@drawable/play_launcher_foreground"
-        android:title="Play" />
+        android:title="" />
 
     <item
         android:id="@+id/scenario_launcher"
         android:icon="@drawable/play_launcher_foreground"
-        android:title="Scenarios" />
+        android:title="" />
 
     <item
         android:id="@+id/bot_launcher"
         android:icon="@drawable/play_launcher_foreground"
-        android:title="Bot" />
+        android:title="" />
 
 
 
