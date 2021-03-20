@@ -5,6 +5,7 @@ pluginManagement {
         maven { url 'https://plugins.gradle.org/m2/' }
     }
 }
+//include ':engine'
 include ':localgamestatecalculator'
 include ':infrastructure'
 include ':application'
