@@ -2,8 +2,5 @@ package com.jakefoundation.buildabotworkshop.localgamestatecalculator.presentati
 
 import com.jakefoundation.buildabotworkshop.localgamestatecalculator.domain.entities.obstacles.Wall
 
-class GameStateTracker {
-    val tanks = listOf<OwnedTank>()
-    val bullets = listOf<OwnedBullet>()
-    val gameBoard = GameBoard()
+data class GameStateTracker (var tanks: List<OwnedTank> = listOf<OwnedTank>(), var bullets: List<OwnedBullet> = listOf<OwnedBullet>(), var gameBoard: GameBoard = GameBoard()) {
 }

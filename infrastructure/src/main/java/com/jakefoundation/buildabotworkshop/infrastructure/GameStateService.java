@@ -111,7 +111,7 @@ public class GameStateService implements IFireBulletCommandService, IGetGameStat
 
         List<Obstacle> domainObstacles = new ArrayList<>();
         List<Collectable> domainCollectables = new ArrayList<>();
-        
+
         return new GameState (
                 yourUnit,
                 domainTanks,
