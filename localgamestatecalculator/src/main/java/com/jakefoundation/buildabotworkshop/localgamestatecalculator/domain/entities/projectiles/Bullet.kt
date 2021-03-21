@@ -1,12 +1,10 @@
 package com.jakefoundation.buildabotworkshop.localgamestatecalculator.domain.entities.projectiles
 
-import com.jakefoundation.buildabotworkshop.localgamestatecalculator.domain.entities.protocols.Collidable
-import com.jakefoundation.buildabotworkshop.localgamestatecalculator.domain.entities.protocols.Damaging
-import com.jakefoundation.buildabotworkshop.localgamestatecalculator.domain.entities.protocols.Destroyable
-import com.jakefoundation.buildabotworkshop.localgamestatecalculator.domain.entities.protocols.Movable
+import com.jakefoundation.buildabotworkshop.localgamestatecalculator.domain.entities.protocols.*
 import com.jakefoundation.buildabotworkshop.localgamestatecalculator.domain.entities.protocols.data.*
+import com.jakefoundation.buildabotworkshop.localgamestatecalculator.domain.entities.units.Tank
 
-class Bullet (override val location: Location, override val direction: Direction)
+data class Bullet (override val location: Location, override val direction: Direction)
         : Movable, Collidable, Destroyable, Damaging {
     override val speed: Speed = Speed(5.0)
     override val size: Size = Size(1.0)
@@ -16,6 +14,14 @@ class Bullet (override val location: Location, override val direction: Direction
 
     override fun isDestroyed () : Boolean {
         return hasCollided;
+    }
+
+    override fun isTouching(otherCollidable: Collidable): Boolean {
+        val touches = super.isTouching(otherCollidable)
+        if (touches && otherCollidable is Damageable) {
+            hasCollided = true
+        }
+        return touches
     }
 
 
