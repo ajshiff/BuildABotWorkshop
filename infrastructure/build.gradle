@@ -9,4 +9,7 @@ java {
 
 dependencies {
     implementation 'junit:junit:4.13.2'
+    implementation project(path: ':application')
+    implementation project(path: ':domain')
+    implementation project(path: ':localgamestatecalculator')
 }
