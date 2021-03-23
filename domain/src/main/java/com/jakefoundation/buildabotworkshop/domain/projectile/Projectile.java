@@ -10,7 +10,8 @@ public class Projectile {
     private final Angle angle;
     private final Speed speed;
 
-    public Projectile (ProjectileType projectileType, Position pos, Angle angle, Speed speed) {
+    public Projectile (ProjectileType projectileType, 
+    Position pos, Angle angle, Speed speed) {
 
         this.projectileType = projectileType;
         this.pos = pos;

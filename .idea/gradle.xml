@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/application" />
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/infrastructure" />
+            <option value="$PROJECT_DIR$/localgamestatecalculator" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
