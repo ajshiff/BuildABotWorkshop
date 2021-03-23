@@ -10,6 +10,7 @@ package com.jakefoundation.buildabotworkshop.application.fireBulletCommand;
 import com.jakefoundation.buildabotworkshop.application.common.Authorization;
 import com.jakefoundation.buildabotworkshop.application.common.ResultStatus;
 import com.jakefoundation.buildabotworkshop.domain.FireBulletCommand;
+import com.jakefoundation.buildabotworkshop.domain.ShouldDo;
 
 public class FireBulletCommandHandler {
 
@@ -20,10 +21,11 @@ public class FireBulletCommandHandler {
     }
 
     public ResultStatus handleFireBulletCommand(Authorization auth, FireBulletCommand fireBulletCommand){
+        if (fireBulletCommand.getDoFire() == ShouldDo.dont) {
+            return ResultStatus.success;
+        }
         FireBulletRequest request = new FireBulletRequest(auth, fireBulletCommand);
-        ResultStatus result = fireBulletService.sendFireBulletRequest(request);
-        return result;
-
+        return fireBulletService.sendFireBulletRequest(request);
     }
 }
 
