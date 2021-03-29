@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainMenu">
+
+    <fragment
+        android:id="@+id/mainMenu"
+        android:name="com.jakefoundation.buildabotworkshop.MainMenu"
+        android:label="fragment_main_menu"
+        tools:layout="@layout/fragment_main_menu" >
+        <action
+            android:id="@+id/action_mainMenu_to_botInspector"
+            app:destination="@id/botInspector"
+            app:popUpTo="@id/mainMenu" />
+        <action
+            android:id="@+id/action_mainMenu_to_gamePlayer"
+            app:destination="@id/gamePlayer"
+            app:popUpTo="@id/mainMenu" />
+    </fragment>
+    <fragment
+        android:id="@+id/gamePlayer"
+        android:name="com.jakefoundation.buildabotworkshop.GamePlayer"
+        android:label="game_player_fragment"
+        tools:layout="@layout/game_player_fragment" />
+    <fragment
+        android:id="@+id/botInspector"
+        android:name="com.jakefoundation.buildabotworkshop.BotInspector"
+        android:label="fragment_bot_inspector_list"
+        tools:layout="@layout/fragment_bot_inspector_list" />
+</navigation>
