@@ -16,8 +16,4 @@ public class BotImpl implements Bot {
         return null;
     }
 
-    @Override
-    public String getOwnerName() {
-        return null;
-    }
 }
