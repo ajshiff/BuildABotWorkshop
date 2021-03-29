@@ -13,11 +13,10 @@
         <action
             android:id="@+id/action_mainMenu_to_botInspector"
             app:destination="@id/botInspector"
-            app:popUpTo="@id/mainMenu" />
+            app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_mainMenu_to_gamePlayer"
-            app:destination="@id/gamePlayer"
-            app:popUpTo="@id/mainMenu" />
+            app:destination="@id/gamePlayer" />
     </fragment>
     <fragment
         android:id="@+id/gamePlayer"
