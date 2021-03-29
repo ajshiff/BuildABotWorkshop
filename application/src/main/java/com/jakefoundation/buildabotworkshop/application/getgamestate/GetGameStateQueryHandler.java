@@ -4,10 +4,10 @@ import com.jakefoundation.buildabotworkshop.application.common.Authorization;
 import com.jakefoundation.buildabotworkshop.domain.GameState;
 import com.sun.org.apache.xpath.internal.objects.XObject;
 
-public class GetGameStateHandler {
+public class GetGameStateQueryHandler {
     private final IGetGameStateService gameStateService;
 
-    public GetGameStateHandler(IGetGameStateService gameStateService) {
+    public GetGameStateQueryHandler(IGetGameStateService gameStateService) {
         this.gameStateService = gameStateService;
 
     }

@@ -64,7 +64,7 @@ class LocalGameStateRequestHandler {
             gs.tanks = handleSpawnRequests(spawnTankRequest, gs)
             gameState = gs
             delay(50)
-            if (counter++ < 1000000)
+            if (counter++ < 10)
                 gameOver = true
         }
     }

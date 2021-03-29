@@ -1,6 +1,7 @@
 package com.jakefoundation.buildabotworkshop.application.spawntankrequest;
 
 import com.jakefoundation.buildabotworkshop.application.common.Authorization;
+import com.jakefoundation.buildabotworkshop.application.common.ResultStatus;
 import com.jakefoundation.buildabotworkshop.domain.GameState;
 
 public class SpawnTankRequestHandler {
@@ -11,10 +12,10 @@ public class SpawnTankRequestHandler {
 
     }
 
-    public GameState getGameState (Authorization authorization){
+    public ResultStatus getGameState (Authorization authorization){
         SpawnTankRequest spawnTankRequest = new SpawnTankRequest(authorization);
 
-        return gameStateService.sendGetGameStateRequest(spawnTankRequest);
+        return gameStateService.sendSpawnTankRequest(spawnTankRequest);
     }
 
 }

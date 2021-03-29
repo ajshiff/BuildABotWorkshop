@@ -15,7 +15,7 @@ public class MoveTankCommandHandler {
 
     }
 
-    public ResultStatus handleMoveTankCommand(MoveTankCommand moveTankCommand, Authorization authorization) {
+    public ResultStatus handleMoveTankCommand(Authorization authorization, MoveTankCommand moveTankCommand) {
         if (moveTankCommand.getShouldMove() == ShouldDo.dont) {
             return ResultStatus.success;
 
