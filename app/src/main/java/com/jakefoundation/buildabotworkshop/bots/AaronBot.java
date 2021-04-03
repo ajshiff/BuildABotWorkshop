@@ -1,11 +1,12 @@
 package com.jakefoundation.buildabotworkshop.bots;
 
+import com.jakefoundation.buildabotworkshop.domain.Angle;
 import com.jakefoundation.buildabotworkshop.domain.Bot;
 import com.jakefoundation.buildabotworkshop.domain.FireBulletCommand;
 import com.jakefoundation.buildabotworkshop.domain.GameState;
 import com.jakefoundation.buildabotworkshop.domain.MoveTankCommand;
-
-import kotlin.NotImplementedError;
+import com.jakefoundation.buildabotworkshop.domain.ShouldDo;
+import com.jakefoundation.buildabotworkshop.domain.Speed;
 
 public class AaronBot implements Bot {
 
@@ -16,12 +17,12 @@ public class AaronBot implements Bot {
 
     @Override
     public MoveTankCommand moveCommand(GameState gameState) {
-        throw new NotImplementedError();
+        return new MoveTankCommand(ShouldDo.dont, new Angle(0.0), new Speed(0.0));
     }
 
     @Override
     public FireBulletCommand fireCommand(GameState gameState) {
-        throw new NotImplementedError();
+        return new FireBulletCommand(ShouldDo.dont, new Angle(0.0));
     }
 
 }

@@ -1,11 +1,14 @@
 package com.jakefoundation.buildabotworkshop;
 
+import android.util.Log;
+
 import androidx.lifecycle.ViewModel;
 
 import com.jakefoundation.buildabotworkshop.application.MoveTankCommand.MoveTankCommandHandler;
 import com.jakefoundation.buildabotworkshop.application.common.Authorization;
 import com.jakefoundation.buildabotworkshop.application.fireBulletCommand.FireBulletCommandHandler;
 import com.jakefoundation.buildabotworkshop.application.getgamestate.GetGameStateQueryHandler;
+import com.jakefoundation.buildabotworkshop.application.spawntankrequest.SpawnTankRequestHandler;
 import com.jakefoundation.buildabotworkshop.bots.AaronBot;
 import com.jakefoundation.buildabotworkshop.bots.DanielBot;
 import com.jakefoundation.buildabotworkshop.bots.MikeBot;
@@ -27,16 +30,17 @@ public class GamePlayerViewModel extends ViewModel {
     private final GetGameStateQueryHandler getGameState = new GetGameStateQueryHandler(gss);
     private final FireBulletCommandHandler fireBulletCommand = new FireBulletCommandHandler(gss);
     private final MoveTankCommandHandler moveTankCommand = new MoveTankCommandHandler(gss);
-    private final List<Player> players = registerPlayers();
+    private final SpawnTankRequestHandler spawnTankCommand = new SpawnTankRequestHandler(gss);
+    public final List<Player> players = registerPlayers();
     // List of Tanks
-    public List<Unit> units;
+//    public List<Unit> units;
     // List of Bullets
-    public List<Projectile> projectiles;
+    public GameState gameState;
     // Other Game-State info
 
 
     // hard coded list of 4 players for now
-    public List<Player> registerPlayers () {
+    private List<Player> registerPlayers () {
         Bot aaronBot = new AaronBot();
         Bot pamBot = new PamBot();
         Bot mikeBot = new MikeBot();
@@ -46,29 +50,49 @@ public class GamePlayerViewModel extends ViewModel {
         Authorization mikeAuth = new Authorization("Mike", "33333");
         Authorization danAuth = new Authorization("Daniel", "44444");
         List<Player> players = new ArrayList<>();
-        players.add(new Player(aaronAuth, aaronBot, TankColors.blue));
-        players.add(new Player(pamAuth, pamBot, TankColors.pink));
-        players.add(new Player(mikeAuth, mikeBot, TankColors.green));
-        players.add(new Player(danAuth, danBot, TankColors.orange));
+        players.add(new Player(aaronAuth, aaronBot, TankColors.cyan));
+        players.add(new Player(pamAuth, aaronBot, TankColors.pink));
+//        players.add(new Player(pamAuth, pamBot, TankColors.pink));
+//        players.add(new Player(mikeAuth, mikeBot, TankColors.green));
+//        players.add(new Player(danAuth, danBot, TankColors.orange));
         return players;
     }
 
-    public void getGameUpdates () {
-        GameState gs = getGameState(players.get(0));
-        units = gs.getUnits();
-        projectiles = gs.getProjectiles();
+    private void getGameUpdates () {
+        gameState = getGameState(players.get(0));
     }
 
     private GameState getGameState(Player player) {
         return getGameState.getGameState(player.getAuth());
     }
 
-    public void sendFireRequest (Player player) {
-        fireBulletCommand.handleFireBulletCommand(player.getAuth(), player.getBot().fireCommand(getGameState(player)));
+    private void sendFireRequest (Player player, GameState gs) {
+        fireBulletCommand.handleFireBulletCommand(player.getAuth(), player.getBot().fireCommand(gs));
     }
 
-    public void sendMoveRequest (Player player) {
-        moveTankCommand.handleMoveTankCommand(player.getAuth(), player.getBot().moveCommand(getGameState(player)));
+    private void sendMoveRequest (Player player, GameState gs) {
+        moveTankCommand.handleMoveTankCommand(player.getAuth(), player.getBot().moveCommand(gs));
+    }
+
+    // run once
+    public void init() {
+        for (Player player : players) {
+            spawnTankCommand.handleSpawnTankCommand(player.getAuth());
+        }
+    }
+
+    // put in a game loop
+    public void playLoop () {
+//        Log.i("YAY","BOOP BOOP SCOOP");
+        // get updated info for displaying
+        getGameUpdates();
+        // run each player's action
+        for (Player player : players) {
+            GameState gs = getGameState(player);
+            player.setSelfDetails(gs.getYourUnit());
+            sendFireRequest(player, gs);
+            sendMoveRequest(player, gs);
+        }
     }
 
 }

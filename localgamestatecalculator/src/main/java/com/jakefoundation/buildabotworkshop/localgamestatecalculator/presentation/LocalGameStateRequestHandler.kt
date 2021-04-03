@@ -48,6 +48,7 @@ class LocalGameStateRequestHandler {
         var gameOver = false
         var counter = 0
         while (!gameOver) {
+            System.out.println("running game loop")
             var gs = gameState.copy()
             // Move Bullets
             gs.bullets = handleMoveBullets(gs)
@@ -64,7 +65,7 @@ class LocalGameStateRequestHandler {
             gs.tanks = handleSpawnRequests(spawnTankRequest, gs)
             gameState = gs
             delay(50)
-            if (counter++ < 10)
+            if (counter++ > 10)
                 gameOver = true
         }
     }

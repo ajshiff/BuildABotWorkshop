@@ -12,7 +12,7 @@ public class SpawnTankRequestHandler {
 
     }
 
-    public ResultStatus getGameState (Authorization authorization){
+    public ResultStatus handleSpawnTankCommand(Authorization authorization){
         SpawnTankRequest spawnTankRequest = new SpawnTankRequest(authorization);
 
         return gameStateService.sendSpawnTankRequest(spawnTankRequest);

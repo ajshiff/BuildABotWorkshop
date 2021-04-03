@@ -2,11 +2,13 @@ package com.jakefoundation.buildabotworkshop.models;
 
 import com.jakefoundation.buildabotworkshop.application.common.Authorization;
 import com.jakefoundation.buildabotworkshop.domain.Bot;
+import com.jakefoundation.buildabotworkshop.domain.unit.Unit;
 
 public class Player {
     private final Bot bot;
     private final TankColors color;
     private final Authorization auth;
+    private Unit selfDetails;
 
     public Player(Authorization auth,
                   Bot bot,
@@ -27,4 +29,8 @@ public class Player {
     public TankColors getColor() {
         return color;
     }
+
+    public Unit getSelfDetails() { return selfDetails; }
+
+    public void setSelfDetails(Unit unit) { selfDetails = unit; }
 }
