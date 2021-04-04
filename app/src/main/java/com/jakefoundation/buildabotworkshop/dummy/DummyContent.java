@@ -27,9 +27,10 @@ public class DummyContent {
 
     static {
         // Add some sample items.
-        for (int i = 1; i <= COUNT; i++) {
-            addItem(createDummyItem(i));
-        }
+        addItem(createDummyItem(1, "Aaron Bot"));
+        addItem(createDummyItem(2, "Daniel Bot"));
+        addItem(createDummyItem(3, "Mike Bot"));
+        addItem(createDummyItem(4, "Pam Bot"));
     }
 
     private static void addItem(BotItem item) {
@@ -37,8 +38,8 @@ public class DummyContent {
         ITEM_MAP.put(item.id, item);
     }
 
-    private static BotItem createDummyItem(int position) {
-        return new BotItem(String.valueOf(position), "Bot " + position, makeDetails(position));
+    private static BotItem createDummyItem(int position, String name) {
+        return new BotItem(String.valueOf(position), name, makeDetails(position));
     }
 
     private static String makeDetails(int position) {
