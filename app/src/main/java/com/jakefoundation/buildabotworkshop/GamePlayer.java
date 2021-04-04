@@ -1,5 +1,6 @@
 package com.jakefoundation.buildabotworkshop;
 
+import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
@@ -23,6 +24,8 @@ import com.jakefoundation.buildabotworkshop.domain.unit.Unit;
 import com.jakefoundation.buildabotworkshop.models.Player;
 import com.jakefoundation.buildabotworkshop.models.TankColors;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -72,12 +75,6 @@ public class GamePlayer extends Fragment {
     public void onPause () {
         super.onPause();
         gameLoopThread.interrupt();
-        try {
-            //noinspection BusyWait
-            Thread.sleep(300);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     private final Runnable gameLoop = () -> {
@@ -85,7 +82,6 @@ public class GamePlayer extends Fragment {
         mViewModel.playLoop();
         int counter = 0;
         while (counter < 100 && !gameLoopThread.isInterrupted()) {
-//            Log.i("HALP", "MEEEEE");
             counter++;
             updateView();
             mViewModel.playLoop();
@@ -100,27 +96,24 @@ public class GamePlayer extends Fragment {
 
     private float po = 0f;
     private void updateView () {
-        po += 25;
+        po += 75;
+        AnimatorSet animSetXY = new AnimatorSet();
+        Collection<Animator> animations = new ArrayList<>();
         for (Player player : mViewModel.players) {
-//            Position playerPos = player.getSelfDetails().getPosition();
-            requireActivity().runOnUiThread(() -> animateDiagonalPan(tankViews.get(player.getColor()),
-                   po % pixelWidth,
-                    po % pixelWidth));
+            float xOffset = po % pixelWidth;
+            float yOffset = po % pixelHeight;
+            View v = tankViews.get(player.getColor());
+
+            ObjectAnimator y = ObjectAnimator.ofFloat(v,"translationY", yOffset);
+            ObjectAnimator x = ObjectAnimator.ofFloat(v,"translationX", xOffset);
+
+            animations.add(x);
+            animations.add(y);
         }
-    }
-
-    private void animateDiagonalPan(View v, float xOffset, float yOffset) {
+        animSetXY.playTogether(animations);
+        animSetXY.setDuration(100);
         if (!gameLoopThread.isInterrupted()) {
-            AnimatorSet animSetXY = new AnimatorSet();
-            ObjectAnimator y = ObjectAnimator.ofFloat(v,
-                    "translationY", yOffset);
-
-            ObjectAnimator x = ObjectAnimator.ofFloat(v,
-                    "translationX", xOffset);
-
-            animSetXY.playTogether(x, y);
-            animSetXY.setDuration(100);
-            animSetXY.start();
+            requireActivity().runOnUiThread(animSetXY::start);
         }
     }
 
