@@ -126,7 +126,7 @@ public class GamePlayer extends Fragment {
         // update tank views
         for (Player player : mViewModel.players) {
             if (player.getSelfDetails() != null) {
-                requireActivity().runOnUiThread(() -> tankViews.get(player.getColor()).setVisibility(View.VISIBLEgit ));
+                requireActivity().runOnUiThread(() -> tankViews.get(player.getColor()).setVisibility(View.VISIBLE));
                 View v = tankViews.get(player.getColor());
                 Unit details = player.getSelfDetails();
 //                v.setRotation((float)details.getAngle().getAngleValue());
