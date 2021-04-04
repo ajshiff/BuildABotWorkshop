@@ -15,7 +15,8 @@ public class Unit {
   private final HitPoints remainHitPoints;
   private final Owner owner;
 
-  public Unit (UnitType unitType,
+  public Unit (
+      UnitType unitType,
       Position pos,
       Angle angle,
       Speed speed,
