@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.jakefoundation.buildabotworkshop.domain.Position;
+import com.jakefoundation.buildabotworkshop.domain.projectile.Projectile;
 import com.jakefoundation.buildabotworkshop.domain.unit.Unit;
 import com.jakefoundation.buildabotworkshop.models.Player;
 import com.jakefoundation.buildabotworkshop.models.TankColors;
@@ -27,12 +28,14 @@ import com.jakefoundation.buildabotworkshop.models.TankColors;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class GamePlayer extends Fragment {
 
     private GamePlayerViewModel mViewModel;
     private final Map<TankColors, View> tankViews = new HashMap<>();
+    private final List<View> projectileViews = new ArrayList<>();
     int pixelHeight = 1;
     int pixelWidth = 1;
     Thread gameLoopThread;
@@ -67,6 +70,12 @@ public class GamePlayer extends Fragment {
         tankViews.put(TankColors.green, getView().findViewById(R.id.green_tank));
         tankViews.put(TankColors.orange, getView().findViewById(R.id.orange_tank));
         tankViews.put(TankColors.purple, getView().findViewById(R.id.pruple_tank));
+        projectileViews.add(getView().findViewById(R.id.cyan_bullet));
+        projectileViews.add(getView().findViewById(R.id.blue_bullet));
+        projectileViews.add(getView().findViewById(R.id.pink_bullet));
+        projectileViews.add(getView().findViewById(R.id.green_bullet));
+        projectileViews.add(getView().findViewById(R.id.orange_bullet));
+        projectileViews.add(getView().findViewById(R.id.purple_bullet));
         gameLoopThread = new Thread(gameLoop);
         gameLoopThread.start();
     }
@@ -81,7 +90,7 @@ public class GamePlayer extends Fragment {
         mViewModel.init();
         mViewModel.playLoop();
         int counter = 0;
-        while (counter < 10000 && !gameLoopThread.isInterrupted()) {
+        while ((counter < 1000 || mViewModel.gameState.getUnits().size() <= 1) && !gameLoopThread.isInterrupted()) {
             try {
                 //noinspection BusyWait
                 Thread.sleep(20);
@@ -94,21 +103,20 @@ public class GamePlayer extends Fragment {
         }
     };
 
-//    private float po = 0f;
     private void updateView () {
-//        po += 75;
         AnimatorSet animSetXY = new AnimatorSet();
         Collection<Animator> animations = new ArrayList<>();
+        // update tank views
         for (Player player : mViewModel.players) {
             if (player.getSelfDetails() != null) {
                 View v = tankViews.get(player.getColor());
                 Unit details = player.getSelfDetails();
                 if (details.getRemainHitPoints().getValue() <= 0)
                 {
-                    v.setVisibility(View.GONE);
+                    requireActivity().runOnUiThread(() -> v.setVisibility(View.GONE));
                     continue;
                 }
-                v.setRotation((float)details.getAngle().getAngleValue());
+//                v.setRotation((float)details.getAngle().getAngleValue());
                 Pair<Float, Float> pixelPos = convertPosToPixel(details.getPosition());
                 float xOffset = pixelPos.first % pixelWidth;
                 float yOffset = pixelPos.second % pixelHeight;
@@ -119,6 +127,25 @@ public class GamePlayer extends Fragment {
                 animations.add(x);
                 animations.add(y);
             }
+        }
+        // update bullet views
+        int counter = 0;
+        for (Projectile bullet : mViewModel.gameState.getProjectiles()) {
+            counter++;
+            View v = projectileViews.get(counter);
+            requireActivity().runOnUiThread(() -> v.setVisibility(View.VISIBLE));
+            Pair<Float, Float> pixelPos = convertPosToPixel(bullet.getPos());
+            float xOffset = pixelPos.first % pixelWidth;
+            float yOffset = pixelPos.second % pixelHeight;
+            ObjectAnimator y = ObjectAnimator.ofFloat(v,"translationY", yOffset);
+            ObjectAnimator x = ObjectAnimator.ofFloat(v,"translationX", xOffset);
+
+            animations.add(x);
+            animations.add(y);
+        }
+        for (int i = counter; i < projectileViews.size(); i++) {
+            int finalI = i;
+//            requireActivity().runOnUiThread(() -> projectileViews.get(finalI).setVisibility(View.GONE));
         }
         animSetXY.playTogether(animations);
         animSetXY.setDuration(0);

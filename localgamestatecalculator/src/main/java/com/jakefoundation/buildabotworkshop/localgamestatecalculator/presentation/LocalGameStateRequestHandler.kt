@@ -46,7 +46,7 @@ class LocalGameStateRequestHandler {
         var gameOver = false
         var counter = 0
         while (!gameOver) {
-            System.out.println("running game loop")
+//            System.out.println("running game loop")
             var gs = gameState.copy()
             // copy requests
             val spawnTankRequest = spawnRequests.toList()
@@ -69,7 +69,7 @@ class LocalGameStateRequestHandler {
             // Spawn New Tanks
             gameState = gs
             delay(20)
-            if (counter++ > 10000)
+            if (counter++ > 100 && gs.tanks.count() <= 1)
                 gameOver = true
         }
     }
@@ -97,18 +97,26 @@ class LocalGameStateRequestHandler {
             val direction = Direction(request.angle)
             val speed = Speed(request.speed)
             val location = tank.tank.move(direction, speed).loopLocation(gameState.gameBoard.x, gameState.gameBoard.y)
-            val newTankDetails = Tank(location, direction, speed)
+            val newTankDetails = tank.tank.copy(location = location, direction = direction, currentSpeed = speed)
+            newTankDetails.health = tank.tank.health
             OwnedTank(tank.owner, newTankDetails)
         }
         return notMovingTanks + newTankDetails
     }
 
     private fun handleFireRequests (requests: List<FireBulletRequest>, gameStateTracker: GameStateTracker) : List<OwnedBullet> {
-        val newBullets = requests.distinctBy { request -> request.username }.map { request ->
-            val ownerTank = gameStateTracker.tanks.first() { ownedTank -> ownedTank.owner == request.username }
-            val direction = Direction(request.angle)
-            OwnedBullet(ownerTank.owner, ownerTank.tank, Bullet(ownerTank.tank.location, direction))
-        }
+        val newBullets = requests.distinctBy { request -> request.username }
+                // can only fire if they don't already have a bullet flying
+                .filter { request -> !gameStateTracker.bullets.any {bullet -> request.username == bullet.owner} }
+                .map { request ->
+                    val ownerTank = gameStateTracker.tanks.find() { ownedTank -> ownedTank.owner == request.username }
+                    val direction = Direction(request.angle)
+                    if (ownerTank != null) {
+                        OwnedBullet(ownerTank.owner, ownerTank.tank, Bullet(ownerTank.tank.location, direction))
+                    } else {
+                        null
+                    }
+                }.filterNotNull()
         return gameStateTracker.bullets + newBullets
     }
 
@@ -123,9 +131,12 @@ class LocalGameStateRequestHandler {
     private fun handleBulletCollisions (gameStateTracker: GameStateTracker) : GameStateTracker {
         gameStateTracker.bullets.forEach { bullet ->
             gameStateTracker.tanks.forEach {tank ->
-                val isTouching = bullet.bullet.isTouching(tank.tank)
-                if (isTouching) {
-                    tank.tank.takeDamage(bullet.bullet.damage)
+                if (bullet.owner != tank.owner) {
+                    val isTouching = bullet.bullet.isTouching(tank.tank)
+                    if (isTouching) {
+                        val newHealth = tank.tank.takeDamage(bullet.bullet.damage)
+                        tank.tank.health = newHealth;
+                    }
                 }
             }
         }

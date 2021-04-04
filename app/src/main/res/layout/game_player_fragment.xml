@@ -71,4 +71,54 @@
         tools:layout_editor_absoluteX="71dp"
         tools:layout_editor_absoluteY="330dp" />
 
+    <ImageView
+        android:id="@+id/purple_bullet"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/bullet_0_5x"
+        android:visibility="gone"
+        tools:layout_editor_absoluteX="64dp"
+        tools:layout_editor_absoluteY="107dp" />
+
+    <ImageView
+        android:id="@+id/orange_bullet"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/bullet_0_5x"
+        tools:layout_editor_absoluteX="64dp"
+        tools:layout_editor_absoluteY="107dp" />
+
+    <ImageView
+        android:id="@+id/green_bullet"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/bullet_0_5x"
+        tools:layout_editor_absoluteX="64dp"
+        tools:layout_editor_absoluteY="107dp" />
+
+    <ImageView
+        android:id="@+id/pink_bullet"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/bullet_0_5x"
+        tools:layout_editor_absoluteX="64dp"
+        tools:layout_editor_absoluteY="107dp" />
+
+    <ImageView
+        android:id="@+id/blue_bullet"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/bullet_0_5x"
+        android:visibility="gone"
+        tools:layout_editor_absoluteX="64dp"
+        tools:layout_editor_absoluteY="107dp" />
+
+    <ImageView
+        android:id="@+id/cyan_bullet"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/bullet_0_5x"
+        tools:layout_editor_absoluteX="64dp"
+        tools:layout_editor_absoluteY="107dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

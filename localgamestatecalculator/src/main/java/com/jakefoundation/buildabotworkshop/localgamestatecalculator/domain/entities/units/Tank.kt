@@ -11,8 +11,8 @@ data class Tank(override val location: Location,
                 var currentSpeed: Speed = Speed(0.0))
         : Directable, Collidable, Damageable, Destroyable {
     override val maxSpeed: Speed = Speed(3.0)
-    override val size: Size = Size(3.0)
-    override val health: Health = Health(9)
+    override val size: Size = Size(150.0)
+    override var health: Health = Health(9)
 
     override fun isDestroyed(): Boolean {
         return health.health <= 0

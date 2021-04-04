@@ -24,7 +24,7 @@ public class MikeBot implements Bot {
 
     @Override
     public FireBulletCommand fireCommand(GameState gameState) {
-        return new FireBulletCommand(ShouldDo.dont, new Angle(0.0));
+        return new FireBulletCommand(ShouldDo.doit, new Angle(78.0));
     }
 
 }
