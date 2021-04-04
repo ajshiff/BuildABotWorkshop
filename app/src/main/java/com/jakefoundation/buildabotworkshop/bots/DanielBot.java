@@ -16,12 +16,11 @@ public class DanielBot implements Bot {
 
     @Override
     public MoveTankCommand moveCommand(GameState gameState) {
-        throw new NotImplementedError();
+        return new MoveTankCommand(ShouldDo.doit, new Angle(30.0), new Speed(5.0));
     }
-
     @Override
     public FireBulletCommand fireCommand(GameState gameState) {
-        throw new NotImplementedError();
+        return new FireBulletCommand(ShouldDo.doit, new Angle(9.0));
     }
 
 }
