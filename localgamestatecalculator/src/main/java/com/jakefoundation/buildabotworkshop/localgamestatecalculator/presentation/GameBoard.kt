@@ -1,6 +1,6 @@
 package com.jakefoundation.buildabotworkshop.localgamestatecalculator.presentation
 
 class GameBoard {
-    val x = 50
-    val y = 50
+    val x = 2500
+    val y = 5000
 }

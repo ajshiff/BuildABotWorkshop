@@ -54,7 +54,7 @@ public class GamePlayer extends Fragment {
         // TODO: Use the ViewModel
         DisplayMetrics displayMetrics = new DisplayMetrics();
         requireActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        pixelHeight = displayMetrics.heightPixels;
+        pixelHeight = displayMetrics.heightPixels - 200;
         pixelWidth = displayMetrics.widthPixels;
     }
 
@@ -81,44 +81,54 @@ public class GamePlayer extends Fragment {
         mViewModel.init();
         mViewModel.playLoop();
         int counter = 0;
-        while (counter < 100 && !gameLoopThread.isInterrupted()) {
-            counter++;
-            updateView();
-            mViewModel.playLoop();
+        while (counter < 10000 && !gameLoopThread.isInterrupted()) {
             try {
                 //noinspection BusyWait
-                Thread.sleep(300);
+                Thread.sleep(20);
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            counter++;
+            updateView();
+            mViewModel.playLoop();
         }
     };
 
-    private float po = 0f;
+//    private float po = 0f;
     private void updateView () {
-        po += 75;
+//        po += 75;
         AnimatorSet animSetXY = new AnimatorSet();
         Collection<Animator> animations = new ArrayList<>();
         for (Player player : mViewModel.players) {
-            float xOffset = po % pixelWidth;
-            float yOffset = po % pixelHeight;
-            View v = tankViews.get(player.getColor());
+            if (player.getSelfDetails() != null) {
+                View v = tankViews.get(player.getColor());
+                Unit details = player.getSelfDetails();
+                if (details.getRemainHitPoints().getValue() <= 0)
+                {
+                    v.setVisibility(View.GONE);
+                    continue;
+                }
+                v.setRotation((float)details.getAngle().getAngleValue());
+                Pair<Float, Float> pixelPos = convertPosToPixel(details.getPosition());
+                float xOffset = pixelPos.first % pixelWidth;
+                float yOffset = pixelPos.second % pixelHeight;
 
-            ObjectAnimator y = ObjectAnimator.ofFloat(v,"translationY", yOffset);
-            ObjectAnimator x = ObjectAnimator.ofFloat(v,"translationX", xOffset);
+                ObjectAnimator y = ObjectAnimator.ofFloat(v,"translationY", yOffset);
+                ObjectAnimator x = ObjectAnimator.ofFloat(v,"translationX", xOffset);
 
-            animations.add(x);
-            animations.add(y);
+                animations.add(x);
+                animations.add(y);
+            }
         }
         animSetXY.playTogether(animations);
-        animSetXY.setDuration(100);
+        animSetXY.setDuration(0);
         if (!gameLoopThread.isInterrupted()) {
             requireActivity().runOnUiThread(animSetXY::start);
         }
     }
 
     private float convertAxisToPixel (double conversionScale, int pixels) {
-        return (float) conversionScale * pixels;
+        return (float) ((conversionScale * pixels));
     }
 
     private Pair<Float, Float> convertPosToPixel (Position pos) {

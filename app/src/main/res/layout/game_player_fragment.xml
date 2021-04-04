@@ -40,7 +40,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@drawable/tank_green_nobuffer_0_5x"
-        android:visibility="gone"
+        android:visibility="visible"
         tools:layout_editor_absoluteX="54dp"
         tools:layout_editor_absoluteY="440dp" />
 
@@ -58,7 +58,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@drawable/tank_orange_nobuffer_0_5x"
-        android:visibility="gone"
+        android:visibility="visible"
         tools:layout_editor_absoluteX="82dp"
         tools:layout_editor_absoluteY="220dp" />
 

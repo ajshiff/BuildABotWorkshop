@@ -4,8 +4,6 @@ import com.jakefoundation.buildabotworkshop.application.MoveTankCommand.MoveTank
 import com.jakefoundation.buildabotworkshop.application.fireBulletCommand.FireBulletRequest
 import com.jakefoundation.buildabotworkshop.application.getgamestate.GetGameStateRequest
 import com.jakefoundation.buildabotworkshop.application.spawntankrequest.SpawnTankRequest
-import com.jakefoundation.buildabotworkshop.domain.GameState
-import com.jakefoundation.buildabotworkshop.localgamestatecalculator.domain.entities.obstacles.Wall
 import com.jakefoundation.buildabotworkshop.localgamestatecalculator.domain.entities.projectiles.Bullet
 import com.jakefoundation.buildabotworkshop.localgamestatecalculator.domain.entities.protocols.data.Direction
 import com.jakefoundation.buildabotworkshop.localgamestatecalculator.domain.entities.protocols.data.Location
@@ -16,9 +14,9 @@ import kotlin.random.Random
 
 class LocalGameStateRequestHandler {
 
-    private val spawnRequests = mutableListOf<SpawnTankRequest>()
-    private val moveRequests = mutableListOf<MoveTankRequest>()
-    private val fireRequests = mutableListOf<FireBulletRequest>()
+    private var spawnRequests = mutableListOf<SpawnTankRequest>()
+    private var moveRequests = mutableListOf<MoveTankRequest>()
+    private var fireRequests = mutableListOf<FireBulletRequest>()
     private var gameState = GameStateTracker()
     private val randomGenerator = Random
 
@@ -50,22 +48,28 @@ class LocalGameStateRequestHandler {
         while (!gameOver) {
             System.out.println("running game loop")
             var gs = gameState.copy()
+            // copy requests
+            val spawnTankRequest = spawnRequests.toList()
+            val fireBulletRequests = fireRequests.toList()
+            val moveTankRequests = moveRequests.toList()
+            // clear requests
+            spawnRequests = mutableListOf<SpawnTankRequest>()
+            fireRequests = mutableListOf<FireBulletRequest>()
+            moveRequests = mutableListOf<MoveTankRequest>()
+
+            gs.tanks = handleSpawnRequests(spawnTankRequest, gs)
             // Move Bullets
             gs.bullets = handleMoveBullets(gs)
             // Check Collisions
             gs = handleBulletCollisions(gs)
             // Fire New Bullets
-            val fireRequests = fireRequests.toList()
-            gs.bullets = handleFireRequests(fireRequests, gs)
+            gs.bullets = handleFireRequests(fireBulletRequests, gs)
             // Move Tanks
-            val moveRequests = moveRequests.toList()
-            gs.tanks = handleMoveRequests(moveRequests, gs)
+            gs.tanks = handleMoveRequests(moveTankRequests, gs)
             // Spawn New Tanks
-            val spawnTankRequest = spawnRequests.toList()
-            gs.tanks = handleSpawnRequests(spawnTankRequest, gs)
             gameState = gs
-            delay(50)
-            if (counter++ > 10)
+            delay(20)
+            if (counter++ > 10000)
                 gameOver = true
         }
     }
@@ -92,7 +96,7 @@ class LocalGameStateRequestHandler {
             val request = requests.first {request -> request.username == tank.owner}
             val direction = Direction(request.angle)
             val speed = Speed(request.speed)
-            val location = tank.tank.move(direction, speed)
+            val location = tank.tank.move(direction, speed).loopLocation(gameState.gameBoard.x, gameState.gameBoard.y)
             val newTankDetails = Tank(location, direction, speed)
             OwnedTank(tank.owner, newTankDetails)
         }
@@ -110,7 +114,7 @@ class LocalGameStateRequestHandler {
 
     private fun handleMoveBullets (gameStateTracker: GameStateTracker) : List<OwnedBullet> {
         return gameStateTracker.bullets.map { bullet ->
-            val newLocation = bullet.bullet.move()
+            val newLocation = bullet.bullet.move().loopLocation(gameState.gameBoard.x, gameState.gameBoard.y)
             val newBulletDetails = bullet.bullet.copy(location = newLocation)
             bullet.copy(bullet = newBulletDetails)
         }

@@ -51,10 +51,9 @@ public class GamePlayerViewModel extends ViewModel {
         Authorization danAuth = new Authorization("Daniel", "44444");
         List<Player> players = new ArrayList<>();
         players.add(new Player(aaronAuth, aaronBot, TankColors.cyan));
-        players.add(new Player(pamAuth, aaronBot, TankColors.pink));
-//        players.add(new Player(pamAuth, pamBot, TankColors.pink));
-//        players.add(new Player(mikeAuth, mikeBot, TankColors.green));
-//        players.add(new Player(danAuth, danBot, TankColors.orange));
+        players.add(new Player(pamAuth, pamBot, TankColors.pink));
+        players.add(new Player(mikeAuth, mikeBot, TankColors.green));
+        players.add(new Player(danAuth, danBot, TankColors.orange));
         return players;
     }
 
@@ -83,7 +82,6 @@ public class GamePlayerViewModel extends ViewModel {
 
     // put in a game loop
     public void playLoop () {
-//        Log.i("YAY","BOOP BOOP SCOOP");
         // get updated info for displaying
         getGameUpdates();
         // run each player's action

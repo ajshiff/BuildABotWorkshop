@@ -11,8 +11,8 @@ interface Movable : Locatable {
     val speed: Speed
 
     fun move () : Location {
-        val deltaX = cos(direction.direction) * speed.speed
-        val deltaY = sin(direction.direction) * speed.speed
+        val deltaX = cos(((direction.direction % 360) * (Math.PI / 180))) * speed.speed
+        val deltaY = sin(((direction.direction % 360) * (Math.PI / 180))) * speed.speed
         val deltaLocation = Location(deltaX, deltaY)
         return location + deltaLocation;
     }

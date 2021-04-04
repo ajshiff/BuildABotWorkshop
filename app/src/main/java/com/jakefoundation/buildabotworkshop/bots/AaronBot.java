@@ -17,7 +17,7 @@ public class AaronBot implements Bot {
 
     @Override
     public MoveTankCommand moveCommand(GameState gameState) {
-        return new MoveTankCommand(ShouldDo.dont, new Angle(0.0), new Speed(0.0));
+        return new MoveTankCommand(ShouldDo.doit, new Angle(0.0), new Speed(10.0));
     }
 
     @Override
