@@ -16,15 +16,12 @@ public class MikeBot implements Bot {
     public String getBotCommonName() {
         return "Mike Bot";
     }
-
     @Override
     public MoveTankCommand moveCommand(GameState gameState) {
-        return new MoveTankCommand(ShouldDo.doit, new Angle(180.0), new Speed(10.0));
+        return new MoveTankCommand(ShouldDo.dont, new Angle(0.0), new Speed(0.0));
     }
-
     @Override
     public FireBulletCommand fireCommand(GameState gameState) {
-        return new FireBulletCommand(ShouldDo.doit, new Angle(78.0));
+        return new FireBulletCommand(ShouldDo.dont, new Angle(0.0));
     }
-
 }
