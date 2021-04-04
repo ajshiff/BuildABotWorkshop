@@ -18,6 +18,7 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.jakefoundation.buildabotworkshop.domain.Position;
 import com.jakefoundation.buildabotworkshop.domain.projectile.Projectile;
@@ -90,17 +91,33 @@ public class GamePlayer extends Fragment {
         mViewModel.init();
         mViewModel.playLoop();
         int counter = 0;
-        while ((counter < 1000 || mViewModel.gameState.getUnits().size() <= 1) && !gameLoopThread.isInterrupted()) {
+        while ((counter < 100 || mViewModel.gameState.getUnits().size() > 1) && !gameLoopThread.isInterrupted()) {
+            counter++;
             try {
                 //noinspection BusyWait
                 Thread.sleep(20);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            counter++;
             updateView();
             mViewModel.playLoop();
         }
+        updateView();
+        for (Player player : mViewModel.players) {
+            if (player.getSelfDetails() != null) {
+                requireActivity().runOnUiThread( () -> {
+                    int duration = Toast.LENGTH_LONG;
+                    Toast toast = Toast.makeText(getContext(),
+                            String.format("The %s tank won! Congrats %s and their bot, %s!",
+                                    player.getColor().name(),
+                                    player.getAuth().getUsername(),
+                                    player.getBot().getBotCommonName()),
+                            duration);
+                    toast.show();
+                });
+            }
+        }
+        gameLoopThread.interrupt();
     };
 
     private void updateView () {
@@ -111,11 +128,6 @@ public class GamePlayer extends Fragment {
             if (player.getSelfDetails() != null) {
                 View v = tankViews.get(player.getColor());
                 Unit details = player.getSelfDetails();
-                if (details.getRemainHitPoints().getValue() <= 0)
-                {
-                    requireActivity().runOnUiThread(() -> v.setVisibility(View.GONE));
-                    continue;
-                }
 //                v.setRotation((float)details.getAngle().getAngleValue());
                 Pair<Float, Float> pixelPos = convertPosToPixel(details.getPosition());
                 float xOffset = pixelPos.first % pixelWidth;
@@ -126,6 +138,8 @@ public class GamePlayer extends Fragment {
 
                 animations.add(x);
                 animations.add(y);
+            } else {
+                requireActivity().runOnUiThread(() -> tankViews.get(player.getColor()).setVisibility(View.GONE));
             }
         }
         // update bullet views
@@ -133,7 +147,7 @@ public class GamePlayer extends Fragment {
         for (Projectile bullet : mViewModel.gameState.getProjectiles()) {
             counter++;
             View v = projectileViews.get(counter);
-            requireActivity().runOnUiThread(() -> v.setVisibility(View.VISIBLE));
+//            requireActivity().runOnUiThread(() -> v.setVisibility(View.VISIBLE));
             Pair<Float, Float> pixelPos = convertPosToPixel(bullet.getPos());
             float xOffset = pixelPos.first % pixelWidth;
             float yOffset = pixelPos.second % pixelHeight;
@@ -149,7 +163,7 @@ public class GamePlayer extends Fragment {
         }
         animSetXY.playTogether(animations);
         animSetXY.setDuration(0);
-        if (!gameLoopThread.isInterrupted()) {
+        if (mViewModel.gameState.getUnits().size() >= 1 && !gameLoopThread.isInterrupted()) {
             requireActivity().runOnUiThread(animSetXY::start);
         }
     }
