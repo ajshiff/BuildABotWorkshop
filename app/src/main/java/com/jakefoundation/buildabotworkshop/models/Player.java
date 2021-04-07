@@ -20,7 +20,12 @@ public class Player {
             new Speed(0.0),
             new HitPoints(1),
             new Owner("default"));
-
+    /**
+     * Another constructor for class Player
+     * @param auth  <the id authorization passcode>
+     * @param bot  <the bot chosen>
+     * @param color  <the color chosen>
+     */
     public Player(Authorization auth,
                   Bot bot,
                   TankColors color) {
@@ -29,19 +34,36 @@ public class Player {
         this.color = color;
     }
 
+    /**
+     * @return the bot chosen
+     */
     public Bot getBot() {
         return bot;
     }
 
+    /**
+     * @return the authorization id passcode
+     */
     public Authorization getAuth() {
         return auth;
     }
 
+
+    /**
+     * @return the color chosen
+     */
     public TankColors getColor() {
         return color;
     }
 
+    /**
+     * @return the details on the bot
+     */
     public Unit getSelfDetails() { return selfDetails; }
 
+    /**
+     *
+     * @param unit to set the details on the bot
+     */
     public void setSelfDetails(Unit unit) { selfDetails = unit; }
 }
