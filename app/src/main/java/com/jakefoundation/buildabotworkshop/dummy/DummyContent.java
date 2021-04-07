@@ -59,6 +59,13 @@ public class DummyContent {
         public final String content;
         public final String details;
 
+
+        /**
+         * Another constructor for class BotItem
+         * @param id  <the id of the dummy>
+         * @param content  <the dummy's content>
+         * @param details  <the details on the actions of the dummy>
+         */
         public BotItem(String id, String content, String details) {
             this.id = id;
             this.content = content;

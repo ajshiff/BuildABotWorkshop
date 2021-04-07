@@ -20,6 +20,12 @@ public class DanielBot implements Bot {
     private Angle angle = new Angle(0.0);
     private int counter = 0;
 
+    /**
+     * This method always returns the new bot with the new values.
+     *
+     * @param  gameState  a class where the states of the game are based
+     * @return      the new bot
+     */
     @Override
     public MoveTankCommand moveCommand(GameState gameState) {
         if (counter++ % 100 == 0)
@@ -27,6 +33,12 @@ public class DanielBot implements Bot {
         return new MoveTankCommand(ShouldDo.doit, angle, new Speed(10.0));
     }
 
+    /**
+     * This method always returns the fire commands the new bot will take.
+     *
+     * @param  gameState  a class where the states of the game are based
+     * @return      the new bot fire commands
+     */
     @Override
     public FireBulletCommand fireCommand(GameState gameState) {
         return new FireBulletCommand(ShouldDo.doit, new Angle(60.0));

@@ -1,6 +1,6 @@
 package com.jakefoundation.buildabotworkshop.application.fireBulletCommand;
 
-/*Create a FireBulletRequest class in the FireBulletCommand folder, according to this UML.
+/**Create a FireBulletRequest class in the FireBulletCommand folder, according to this UML.
  Let Private Fields be final.
  */
 
@@ -14,7 +14,11 @@ public class FireBulletRequest
     private final String password;
     private final double angle;
 
-
+    /**
+     * Another constructor for class FireBulletRequest
+     * @param authorization  <the id authorization>
+     * @param fireBulletCommand   <the handler for the firing command>
+     */
     public FireBulletRequest(Authorization authorization,
                              FireBulletCommand fireBulletCommand)
     {
@@ -24,15 +28,23 @@ public class FireBulletRequest
 
     }
 
-
+    /**
+     * @return the angle
+     */
     public double getAngle() {
         return angle;
     }
 
+    /**
+     * @return the username
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * @return the password
+     */
     public String getPassword() {
         return password;
     }
