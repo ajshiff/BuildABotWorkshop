@@ -19,7 +19,7 @@ public class AaronBot implements Bot {
      * This method always returns the new bot with the new values.
      *
      * @param  gameState  a class where the states of the game are based
-     * @return      the new bot
+     * @return      the new bot move command
      */
     @Override
     public MoveTankCommand moveCommand(GameState gameState) {
